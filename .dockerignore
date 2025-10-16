@@ -1,0 +1,9 @@
+# Ignore node_modules and build output
+node_modules
+dist
+build
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
