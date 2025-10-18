@@ -12,6 +12,7 @@ export default defineConfig({
     // ✨ Wichtig für React Router:
     build: {
         outDir: 'dist',
+        sourcemap: false,
     },
     // Diese Zeile sorgt dafür, dass /login, /register usw. an index.html weitergeleitet werden
     //appType: 'spa' sagt Vite, dass es sich um eine Single Page Application handelt,
