@@ -1,21 +1,28 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import {useState} from "react";
+import {useAuth} from "../context/AuthContext";
+import {useNavigate} from "react-router";
 
 export const LoginPage = () => {
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
-    const { login } = useAuth();
+    const [loaded, setLoaded] = useState(true);
+    const {login} = useAuth();
     const navigate = useNavigate();
 
+
+    //const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            setLoaded(false);
             await login({emailAddress, password});
+            //await sleep(1500);
+            setLoaded(true);
             navigate("/dashboard");
         } catch (err) {
             alert("Login fehlgeschlagen");
+            setLoaded(false);
         }
     };
 
@@ -58,9 +65,14 @@ export const LoginPage = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 rounded-lg transition duration-200"
+                        disabled={!loaded} // optional: deaktiviert während Ladephase
+                        className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 rounded-lg transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:bg-emerald-600"
                     >
-                        Einloggen
+                        {!loaded && (
+                            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        )}
+                        <span>Einloggen</span>
+
                     </button>
                 </form>
 

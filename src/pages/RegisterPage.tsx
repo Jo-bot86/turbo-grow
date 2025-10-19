@@ -7,20 +7,28 @@ export const RegisterPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loaded, setLoaded] = useState(true);
     const { register } = useAuth();
     const navigate = useNavigate();
 
+    //const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        setLoaded(false);
         if (password !== confirmPassword) {
+            setLoaded(true);
             alert("Die Passwörter stimmen nicht überein!");
             return;
         }
         try {
+            //await sleep(5500);
             await register({username, emailAddress, password});
+            setLoaded(true);
             navigate("/login")
         } catch {
+            setLoaded(true);
             alert("Registrierung fehlgeschlagen");
         }
     };
@@ -93,8 +101,12 @@ export const RegisterPage = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 rounded-lg transition duration-200"
+                        className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 rounded-lg transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:bg-emerald-600"
+                        disabled={!loaded}
                     >
+                        {!loaded &&
+                            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        }
                         Registrieren
                     </button>
                 </form>
