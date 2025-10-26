@@ -29,7 +29,11 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
 
 
     // @ts-ignore
-    const register = useCallback(async (data: RegisterRequest) => await authService.register(data),[]);
+    const register = useCallback(async (data: RegisterRequest) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user")
+        return await authService.register(data)
+    },[]);
 
     const login = useCallback(async (data: LoginRequest) => {
         const receivedData = await authService.login(data);

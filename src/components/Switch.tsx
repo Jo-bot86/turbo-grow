@@ -5,6 +5,7 @@ import {ProtectedRoute} from "./ProtectedRoute";
 import AppLayout from "./layout/AppLayout";
 import { Route, Routes } from "react-router";
 import DashboardPage from "./pages/DashboardPage";
+import PlantList from "./pages/plant/PlantList";
 
 export default function Switch() {
     return (
@@ -18,6 +19,16 @@ export default function Switch() {
                     <ProtectedRoute>
                         <AppLayout>
                             <DashboardPage/>
+                        </AppLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/dashboard/kulturen"
+                element={
+                    <ProtectedRoute>
+                        <AppLayout>
+                            <PlantList/>
                         </AppLayout>
                     </ProtectedRoute>
                 }

@@ -1,9 +1,8 @@
-import Sidebar from "../layout/Sidebar";
 
 export default function DashboardPage() {
     return (
         <div className="flex h-[calc(100vh-4rem)] bg-gray-50">
-            <Sidebar />
+
 
             <main className="flex-1 p-8 ml-0 transition-all">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>

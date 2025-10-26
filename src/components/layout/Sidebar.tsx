@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, Calendar, Table, Leaf, ListChecks, Settings } from "lucide-react";
+import { Menu, X, Calendar, Table, Leaf, Calculator, Columns2, Columns3, Columns4 } from "lucide-react";
 
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -18,16 +18,16 @@ export default function Sidebar() {
         {
             title: "Aufgaben",
             links: [
-                { label: "Monatsansicht", path: "/dashboard/aufgaben/monat", icon: <ListChecks className="w-4 h-4" /> },
-                { label: "Wochenansicht", path: "/dashboard/aufgaben/woche", icon: <ListChecks className="w-4 h-4" /> },
-                { label: "Tagesansicht", path: "/dashboard/aufgaben/tag", icon: <ListChecks className="w-4 h-4" /> },
+                { label: "Monatsansicht", path: "/dashboard/aufgaben/monat", icon: <Columns2   className="w-4 h-4" /> },
+                { label: "Wochenansicht", path: "/dashboard/aufgaben/woche", icon: <Columns3 className="w-4 h-4" /> },
+                { label: "Tagesansicht", path: "/dashboard/aufgaben/tag", icon: <Columns4 className="w-4 h-4" /> },
             ],
         },
         {
             title: "Ressourcen",
             links: [
                 { label: "Kulturen", path: "/dashboard/kulturen", icon: <Leaf className="w-4 h-4" /> },
-                { label: "Saatgutrechner", path: "/dashboard/saatgut", icon: <Settings className="w-4 h-4" /> },
+                { label: "Saatgutrechner", path: "/dashboard/saatgut", icon: <Calculator  className="w-4 h-4" /> },
             ],
         },
     ];
