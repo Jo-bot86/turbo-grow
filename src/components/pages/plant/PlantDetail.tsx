@@ -112,7 +112,7 @@ export default function PlantDetail() {
               <ul className='text-gray-800 list-disc pl-5'>
                 {plant.event.map((e, i) => (
                   <li key={i}>
-                    {`Event`} – {new Date().toLocaleDateString()}
+                    {`Event`} – {new Date().toLocaleDateString()} {e.id}
                   </li>
                 ))}
               </ul>
