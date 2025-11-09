@@ -1,22 +1,5 @@
-import api from "./api";
-
-export interface UpdateUserDTO {
-    username: string;
-    password: string;
-}
-
-export interface CreateUserDTO extends UpdateUserDTO {
-    emailAddress: string;
-}
-
-export interface UserDTO  {
-    id: number;
-    role: string;
-    calendars: any[];
-    emailAddress: string;
-    username: string;
-
-}
+import api from "../../api";
+import type { UserDTO,  CreateUserDTO,  UpdateUserDTO} from "../../types/user/userType"
 
 export const userService = {
     async getAll(): Promise<UserDTO[]> {

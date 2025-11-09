@@ -4,9 +4,13 @@ LABEL authors="Josef Weldemariam"
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
+
+# Build-Argument mit Default
 ARG VITE_API_BASE_URL
-ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
 COPY . .
+
+RUN echo "Building with API base URL: $VITE_API_BASE_URL"
 RUN npm run build
 
 # --- Production Stage ---
