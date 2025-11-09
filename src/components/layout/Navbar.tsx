@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { UserDTO } from "../../api/userService";
+import type { UserDTO } from "../../api/types/user/userType";
 
 interface NavbarProps{
     user: UserDTO| null;

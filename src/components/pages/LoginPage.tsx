@@ -22,6 +22,7 @@ export const LoginPage = () => {
             navigate("/dashboard");
         } catch (err) {
             alert("Login fehlgeschlagen");
+            console.log(err)
             setLoaded(false);
         }
     };
