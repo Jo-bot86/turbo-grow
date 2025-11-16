@@ -1,18 +1,21 @@
 import type { EventDTO } from '../event/eventType';
 
-export interface UpdatePlantDTO {
+export interface CreatePlantDTO {
   variety: string;
   name: string;
   genus: string;
-  event: EventDTO[];
   developmentDuration: string | null;
-  germinationTemperature: {
-    opt: number | null;
-    min: number | null;
-    max: number | null;
+  germinationTemperature?: {
+    opt?: number;
+    min?: number;
+    max?: number;
   };
   spacing: SpacingDTO;
-  seedingDepth: RangeCmDTO;
+  seedingDepth?: RangeCmDTO;
+}
+
+export interface UpdatePlantDTO extends CreatePlantDTO {
+  events: EventDTO[];
 }
 
 export interface PlantDTO extends UpdatePlantDTO {
@@ -20,11 +23,11 @@ export interface PlantDTO extends UpdatePlantDTO {
 }
 
 export interface SpacingDTO {
-  rowSpacing: RangeCmDTO;
-  plantSpacing: RangeCmDTO;
+  rowSpacing?: RangeCmDTO;
+  plantSpacing?: RangeCmDTO;
 }
 
 export interface RangeCmDTO {
-  min: number | null;
-  max: number | null;
+  min?: number;
+  max?: number;
 }
