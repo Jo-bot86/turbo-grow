@@ -7,26 +7,25 @@ export default function PlantCreate() {
         variety: '',
         name: '',
         genus: '',
-        event: [],
         developmentDuration: '',
         germinationTemperature: {
-          opt: null,
-          min: null,
-          max: null,
+          opt: undefined,
+          min: undefined,
+          max: undefined,
         },
         spacing: {
           rowSpacing: {
-            min: null,
-            max: null,
+            min: undefined,
+            max: undefined,
           },
           plantSpacing: {
-            min: null,
-            max: null,
+            min: undefined,
+            max: undefined,
           },
         },
         seedingDepth: {
-          min: null,
-          max: null,
+          min: undefined,
+          max: undefined,
         },
       }}
     />

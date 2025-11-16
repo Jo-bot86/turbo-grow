@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router';
 import { usePlant } from '../../hooks/usePlant';
 import LoadingSpinner from '../../util/LoadingSpinner';
-import { formatDuration } from '../../util/formatDuration';
+import { formatDuration } from '../../util/fromatter/formatDuration';
 
 export default function PlantDetail() {
   const { id } = useParams();
@@ -86,10 +86,10 @@ export default function PlantDetail() {
               Abstand
             </h3>
             <p className='text-gray-800'>
-              Zwischen Pflanzen: Min: {plant.spacing.plantSpacing.min} cm, Max:{' '}
+              Zwischen Pflanzen: Min: {plant.spacing.plantSpacing?.min} cm, Max:{' '}
               {plant.spacing.plantSpacing?.max} cm
               <br />
-              Zwischen Reihen: Min: {plant.spacing.rowSpacing.min} cm, Max:{' '}
+              Zwischen Reihen: Min: {plant.spacing.rowSpacing?.min} cm, Max:{' '}
               {plant.spacing.rowSpacing?.max} cm
             </p>
           </div>
@@ -108,9 +108,9 @@ export default function PlantDetail() {
             <h3 className='text-sm font-semibold text-gray-500 uppercase mb-1'>
               Events
             </h3>
-            {plant.event?.length > 0 ? (
+            {plant.events?.length > 0 ? (
               <ul className='text-gray-800 list-disc pl-5'>
-                {plant.event.map((e, i) => (
+                {plant.events.map((e, i) => (
                   <li key={i}>
                     {`Event`} – {new Date().toLocaleDateString()} {e.id}
                   </li>
