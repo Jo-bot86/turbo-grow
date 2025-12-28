@@ -1,0 +1,21 @@
+# --- Build Stage ---
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+
+COPY . .
+RUN npm run build
+
+# --- Asset-Export Stage ---
+# Ein einfacher, leichter Container, der nur die Assets exportiert.
+FROM alpine AS export
+WORKDIR /app
+# Kopiert die gebauten Assets (z.B. index.html, JS/CSS-Dateien)
+COPY --from=build /app/dist /app/dist
+
+# HALTE DEN CONTAINER AKTIV, nachdem das Volume gefüllt wurde
+CMD ["tail", "-f", "/dev/null"]
