@@ -24,10 +24,11 @@ export function usePlants() {
   }, []);
 
   // Neue Pflanze erstellen
-  const addPlant = async (plant: Partial<UpdatePlantDTO>) => {
+  const addPlant = async (plant: Partial<UpdatePlantDTO>) =>  {
     try {
       const newPlant = await plantService.createPlant(plant);
       setPlants((prev) => [...prev, newPlant]);
+      return newPlant.id;
     } catch (err) {
       console.error(err);
       setError('Fehler beim Anlegen der Pflanze.');
