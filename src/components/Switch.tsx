@@ -6,8 +6,9 @@ import AppLayout from './layout/AppLayout';
 import { Route, Routes } from 'react-router';
 import DashboardPage from './pages/DashboardPage';
 import PlantList from './pages/plant/PlantList';
-import PlantDetail from './pages/plant/PlantDetail'
+import PlantDetail from './pages/plant/PlantDetail';
 import PlantCreate from './pages/plant/PlantCreate';
+import PlantEdit from './pages/plant/PlantEdit';
 
 export default function Switch() {
   return (
@@ -51,6 +52,16 @@ export default function Switch() {
           <ProtectedRoute>
             <AppLayout>
               <PlantCreate />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='dashboard/kulturen/edit/:id'
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <PlantEdit />
             </AppLayout>
           </ProtectedRoute>
         }
