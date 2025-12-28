@@ -12,7 +12,7 @@ export default function PlantList() {
   if (error) return <p className='text-red-600'>{error}</p>;
 
   const handleCreate = () => {
-  navigate(`/dashboard/kulturen/create`);
+    navigate(`/dashboard/kulturen/create`);
   };
 
   return (
@@ -27,7 +27,7 @@ export default function PlantList() {
             <div className='flex '>
               <Plus className='mr-2' />
               <span className='sm:hidden'>Neu </span>
-              <span className='hidden sm:block'>Neu Kultur anlegen </span>
+              <span className='hidden sm:block'>Neue Kultur anlegen </span>
             </div>
           </button>
         </div>
