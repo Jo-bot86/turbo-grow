@@ -24,7 +24,7 @@ export function usePlants() {
   }, []);
 
   // Neue Pflanze erstellen
-  const addPlant = async (plant: Partial<UpdatePlantDTO>) =>  {
+  const addPlant = async (plant: Partial<UpdatePlantDTO>) => {
     try {
       const newPlant = await plantService.createPlant(plant);
       setPlants((prev) => [...prev, newPlant]);
