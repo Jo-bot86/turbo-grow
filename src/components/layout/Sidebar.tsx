@@ -1,37 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, Calendar, Table, Leaf, Calculator, Columns2, Columns3, Columns4 } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { SIDEBAR_SECTIONS } from "./sidebar.config";
 
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const location = useLocation();
 
-    const sections = [
-        {
-            title: "Anbauplanung",
-            links: [
-                { label: "Schläge & Beete", path: "/dashboard/felder", icon: <Leaf className="w-4 h-4" /> },
-                { label: "Anbau-Kalender", path: "/dashboard/kalender", icon: <Calendar className="w-4 h-4" /> },
-                { label: "Tabelle", path: "/dashboard/tabelle", icon: <Table className="w-4 h-4" /> },
-            ],
-        },
-        {
-            title: "Aufgaben",
-            links: [
-                { label: "Monatsansicht", path: "/dashboard/aufgaben/monat", icon: <Columns2   className="w-4 h-4" /> },
-                { label: "Wochenansicht", path: "/dashboard/aufgaben/woche", icon: <Columns3 className="w-4 h-4" /> },
-                { label: "Tagesansicht", path: "/dashboard/aufgaben/tag", icon: <Columns4 className="w-4 h-4" /> },
-            ],
-        },
-        {
-            title: "Ressourcen",
-            links: [
-                { label: "Kulturen", path: "/dashboard/kulturen", icon: <Leaf className="w-4 h-4" /> },
-                { label: "Saatgutrechner", path: "/dashboard/saatgut", icon: <Calculator  className="w-4 h-4" /> },
-            ],
-        },
-    ];
-
+   
     return (
         <>
             <aside
@@ -45,7 +21,7 @@ export default function Sidebar() {
                     </button>
                 </div>
 
-                {sections.map((section) => (
+                {SIDEBAR_SECTIONS.map((section) => (
                     <div key={section.title} className="mb-6">
                         <h3 className="uppercase text-gray-400 text-xs mb-3 font-semibold tracking-wide">
                             {section.title}
