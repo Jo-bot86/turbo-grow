@@ -1,24 +1,27 @@
-import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import type { CreatePlantDTO } from '../../../api/types/plant/plantType';
 import NumberInput from '../../util/inputs/NumberInput';
 import { usePlants } from '../../hooks/usePlants';
 import { parseDuration } from '../../util/fromatter/formatDuration';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 interface PlantFormProps {
   plantDTO: CreatePlantDTO;
+  editMode: boolean;
 }
 
 export default function PlantForm(props: PlantFormProps) {
-  const { plantDTO } = props;
+  const { plantDTO, editMode } = props;
   const { germinationTemperature, spacing, seedingDepth } = plantDTO;
   const { rowSpacing, plantSpacing } = spacing;
 
-  const { addPlant } = usePlants();
+  const { addPlant, editPlant } = usePlants();
 
   const [variety, setVariety] = useState(plantDTO.variety);
   const [name, setName] = useState(plantDTO.name);
   const [genus, setGenus] = useState(plantDTO.genus);
+
+  const { id } = useParams<{ id: string }>();
 
   const [developmentDuration, setDevelopmentDuration] = useState(
     String(plantDTO.developmentDuration ?? '')
@@ -315,33 +318,62 @@ export default function PlantForm(props: PlantFormProps) {
     ) {
       return;
     } else {
-      addPlant({
-        variety: variety,
-        name: name,
-        genus: genus,
-        developmentDuration: parseDuration(developmentDuration),
-        germinationTemperature: {
-          opt: Number(optGerminationTemperature.replace(',', '.')),
-          min: Number(minGerminationTemperature.replace(',', '.')),
-          max: Number(maxGerminationTemperature.replace(',', '.')),
-        },
-        spacing: {
-          rowSpacing: {
-            min: Number(minRowSpacing.replace(',', '.')),
-            max: Number(maxRowSpacing.replace(',', '.')),
+      if (!editMode) {
+         addPlant({
+          variety: variety,
+          name: name,
+          genus: genus,
+          developmentDuration: parseDuration(developmentDuration),
+          germinationTemperature: {
+            opt: Number(optGerminationTemperature.replace(',', '.')),
+            min: Number(minGerminationTemperature.replace(',', '.')),
+            max: Number(maxGerminationTemperature.replace(',', '.')),
           },
-          plantSpacing: {
-            min: Number(minPlantSpacing.replace(',', '.')),
-            max: Number(maxPlantSpacing.replace(',', '.')),
+          spacing: {
+            rowSpacing: {
+              min: Number(minRowSpacing.replace(',', '.')),
+              max: Number(maxRowSpacing.replace(',', '.')),
+            },
+            plantSpacing: {
+              min: Number(minPlantSpacing.replace(',', '.')),
+              max: Number(maxPlantSpacing.replace(',', '.')),
+            },
           },
-        },
-        seedingDepth: {
-          min: Number(minSeedingDepth.replace(',', '.')),
-          max: Number(maxSeedingDepth.replace(',', '.')),
-        },
-        events: [],
-      });
-      navigate(`/dashboard/kulturen`);
+          seedingDepth: {
+            min: Number(minSeedingDepth.replace(',', '.')),
+            max: Number(maxSeedingDepth.replace(',', '.')),
+          },
+          events: [],
+        });
+      } else {
+        editPlant(id ?? '', {
+          variety: variety,
+          name: name,
+          genus: genus,
+          developmentDuration: parseDuration(developmentDuration),
+          germinationTemperature: {
+            opt: Number(optGerminationTemperature.replace(',', '.')),
+            min: Number(minGerminationTemperature.replace(',', '.')),
+            max: Number(maxGerminationTemperature.replace(',', '.')),
+          },
+          spacing: {
+            rowSpacing: {
+              min: Number(minRowSpacing.replace(',', '.')),
+              max: Number(maxRowSpacing.replace(',', '.')),
+            },
+            plantSpacing: {
+              min: Number(minPlantSpacing.replace(',', '.')),
+              max: Number(maxPlantSpacing.replace(',', '.')),
+            },
+          },
+          seedingDepth: {
+            min: Number(minSeedingDepth.replace(',', '.')),
+            max: Number(maxSeedingDepth.replace(',', '.')),
+          },
+          events: [],
+        });
+      }
+      navigate(`/dashboard/kulturen/${id}`);
     }
   };
 
@@ -521,10 +553,10 @@ export default function PlantForm(props: PlantFormProps) {
       </div>
       <div className='flex justify-center'>
         <button
-          className='bg-blue-500 hover:bg-blue-700 text-white w-full sm:w-1/2 md:w-1/3 xl:w-1/4 font-bold py-2 px-4 border border-blue-700 rounded'
+          className='bg-green-700 hover:bg-green-500 text-white w-full sm:w-1/2 md:w-1/3 xl:w-1/4 font-bold py-2 px-4 border border-blue-700 rounded'
           onClick={(e) => handlePlantCreate(e)}
         >
-          Kultur erstellen
+          Kultur speichern
         </button>
       </div>
     </form>

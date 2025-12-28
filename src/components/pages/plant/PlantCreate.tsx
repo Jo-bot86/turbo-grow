@@ -28,6 +28,7 @@ export default function PlantCreate() {
           max: undefined,
         },
       }}
+      editMode={false}
     />
   );
 }

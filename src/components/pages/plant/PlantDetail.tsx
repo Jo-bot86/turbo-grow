@@ -12,8 +12,10 @@ export default function PlantDetail() {
   if (error) return <p className='text-red-600'>{error}</p>;
   if (!plant) return <p>Keine Pflanze gefunden</p>;
 
+  const duration = formatDuration(plant.developmentDuration, true);
+
   const handleEdit = () => {
-    navigate(`/dashboard/kulturen/${id}/edit`);
+    navigate(`/dashboard/kulturen/edit/${id}`);
   };
 
   const handleDelete = async () => {
@@ -63,9 +65,7 @@ export default function PlantDetail() {
             <h3 className='text-sm font-semibold text-gray-500 uppercase mb-1'>
               Entwicklung
             </h3>
-            <p className='text-gray-800'>
-              {formatDuration(plant.developmentDuration)}
-            </p>
+            <p className='text-gray-800'>{duration || '-'}</p>
           </div>
 
           <div>
@@ -86,11 +86,13 @@ export default function PlantDetail() {
               Abstand
             </h3>
             <p className='text-gray-800'>
-              Zwischen Pflanzen: Min: {plant.spacing.plantSpacing?.min} cm, Max:{' '}
-              {plant.spacing.plantSpacing?.max} cm
+              Zwischen Pflanzen: Min:{' '}
+              {`${plant.spacing.plantSpacing?.min}`.replace('.', ',')} cm, Max:{' '}
+              {`${plant.spacing.plantSpacing?.max}`.replace('.', ',')} cm
               <br />
-              Zwischen Reihen: Min: {plant.spacing.rowSpacing?.min} cm, Max:{' '}
-              {plant.spacing.rowSpacing?.max} cm
+              Zwischen Reihen: Min:{' '}
+              {`${plant.spacing.rowSpacing?.min}`.replace('.', ',')} cm, Max:{' '}
+              {`${plant.spacing.rowSpacing?.max}`.replace('.', ',')} cm
             </p>
           </div>
 
@@ -99,8 +101,8 @@ export default function PlantDetail() {
               Saattiefe
             </h3>
             <p className='text-gray-800'>
-              Min: {plant.seedingDepth?.min} cm, Max: {plant.seedingDepth?.max}{' '}
-              cm
+              Min: {`${plant.seedingDepth?.min}`.replace('.', ',')} cm, Max:{' '}
+              {`${plant.seedingDepth?.max}`.replace('.', ',')} cm
             </p>
           </div>
 
